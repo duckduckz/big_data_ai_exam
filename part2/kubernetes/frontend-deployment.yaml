@@ -1,0 +1,32 @@
+# Deployment for Frontend
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: exam-yayazhang
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nathansegers/big_data_and_ai-24_may_frontend:versie1
+        ports:
+        - containerPort: 80
+        env:
+        - name: API_PORT
+          value: "80"
+        - name: API_HOST
+          value: "api"
+        - name: NAME
+          value: "Nathan Segers"
+
+# Service for Frontend
+apiVersion: v1
+kind: Service
